@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700");
+@import '../node_modules/reset-css/reset.css';
+
+#app {
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #030303;
+}
+
+
+#nav {
+    padding: 30px;
+
+    a {
+        font-weight: bold;
+        color: #2c3e50;
+
+        &.router-link-exact-active {
+            color: #42b983;
+        }
+    }
+}
+
+button {
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #999;
+    outline: 0;
+    cursor: pointer;
+
+    transition: transfrom 0.3s;
+
+    &.icon-button {
+        width: 25px;
+        height: 25px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+
+button:active {
+    transform: translateY(1px);
+}
