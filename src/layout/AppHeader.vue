@@ -4,15 +4,29 @@
       <router-link to="/">Home</router-link>|
       <router-link to="/about">About</router-link>
     </div>
-    <button class="open-cart-btn" @click="openCartPopup"></button>
+    <button class="open-cart-btn" @click="toogleCartPopup"></button>
+    <cart-popup :products="productsInCart" v-show="cartPopupVisibile"></cart-popup>
   </header>
 </template>
 
 <script>
+import cartPopup from "@/components/cartPopup.vue";
+import { mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      cartPopupVisibile: false
+    };
+  },
+  components: {
+    cartPopup
+  },
+  computed: {
+    ...mapGetters(["productsInCart"])
+  },
   methods: {
-    openCartPopup() {
-      alert("open cart popup");
+    toogleCartPopup() {
+      this.cartPopupVisibile = !this.cartPopupVisibile;
     }
   }
 };

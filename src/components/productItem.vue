@@ -1,36 +1,30 @@
 <template>
   <article class="product-item">
     <figure class="product-image">
-      <img :src="image" alt="product image">
+      <img :src="product.image" alt="product image" />
       <figcaption>
-        <span class="product-title">{{ title }}</span>
-        <span class="product-price">{{ price }} $</span>
+        <span class="product-title">{{ product.title }}</span>
+        <span class="product-price">{{ product.price }} $</span>
       </figcaption>
     </figure>
     <section class="controls-container">
-      <button @click="addItem"></button>
-      <p class="product-amount">0</p>
-      <button @click="removeItem"></button>
+      <button @click="removeProductItem(product.id)"></button>
+      <p class="product-amount">{{ product.amount }}</p>
+      <button @click="addProductItem(product.id)"></button>
     </section>
   </article>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   props: {
-    title: String,
-    price: Number,
-    image: String
+    product: Object
   },
   methods: {
-    addItem () {
-      alert('add item');
-    },
-    removeItem () {
-      alert('remove item');
-    }
+    ...mapActions(["addProductItem", "removeProductItem"])
   }
-}
+};
 </script>
 
 
