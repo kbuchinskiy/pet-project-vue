@@ -1,6 +1,6 @@
 <template>
-  <div class="cart-popup opened">
-    <section v-show="products.length" class="cart-body">
+  <div class="cart-popup" :class="{empty: isEmpty}">
+    <section v-show="!isEmpty" class="cart-body">
       <ul class="cart-list">
         <li v-for="product in products" :key="product.id">
           <div class="cart-item">
@@ -15,10 +15,10 @@
           </div>
         </li>
       </ul>
-      <button @click="cleanCart">Clear Cart</button>
+      <button class="clean-button" @click="cleanCart">Clear Cart</button>
     </section>
-    <section v-show="!products.length" class="cart-alert">
-      Cart is empty
+    <section v-show="isEmpty" class="cart-alert">
+      Your cart is empty
     </section>
   </div>
 </template>
@@ -29,6 +29,11 @@
   export default {
     props: {
       products: Array
+    },
+    computed: {
+      isEmpty() {
+        return !this.products.length;
+      }
     },
     methods: {
       ...mapActions(["addProductItem", "removeProductItem", "removeProduct", "cleanCart"])
@@ -41,12 +46,17 @@
     position: absolute;
     top: 69px;
     left: auto;
-    right: 5%;
+    right: 2%;
     width: 600px;
-    height: 460px;
     box-sizing: border-box;
     background: #fff;
     border: 1px solid #000;
+
+    .cart-alert {
+      padding: 5% 0;
+      text-align: center;
+      font-size: 20px;
+    }
 
     .cart-body {
       display: flex;
@@ -55,16 +65,17 @@
       align-items: flex-end;
       padding: 5%;
 
-      button[data-action="clear-cart"] {
-        margin-top: 45px;
+      .clean-button {
+        padding: 1% 2%;
+        background: brown;
+        color: aliceblue;
       }
 
       .cart-list {
         overflow-y: auto;
-        height: 330px;
-        width: 100%;
         box-sizing: border-box;
-        padding-right: 15px;
+        width: 100%;
+        margin-bottom: 30px;
 
         .cart-item {
           display: flex;
@@ -80,7 +91,7 @@
 
           .delete-button {
             margin-right: 10px;
-
+            background: brown;
           }
 
           .cart-item-title {
@@ -101,6 +112,12 @@
           }
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .cart-popup {
+      width: 96%;
     }
   }
 </style>

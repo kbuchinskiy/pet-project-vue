@@ -1,134 +1,134 @@
 <template>
   <div class="product-list">
     <product-item
-      v-for="product in products"
-      :key="product.id"
-      :product="product"
+        v-for="product in products"
+        :key="product.id"
+        :product="product"
     ></product-item>
   </div>
 </template>
 
 <script>
-import productItem from "@/components/productItem.vue";
-import { mapGetters } from "vuex";
+  import productItem from "@/components/productItem.vue";
+  import {mapGetters} from "vuex";
 
-export default {
-  components: {
-    productItem
-  },
-  data() {
-    return {
-      products: []
-    };
-  },
-  computed: {
-    ...mapGetters(["productsInStock"])
-  },
-  beforeMount() {
-    this.products = [
-      {
-        id: "prod1",
-        title: "Product 1",
-        price: 250,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      },
-      {
-        id: "prod2",
-        title: "Product 2",
-        price: 150,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      },
-      {
-        id: "prod3",
-        title: "Product 3",
-        price: 250,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      },
-      {
-        id: "prod4",
-        title: "Product 4",
-        price: 240,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      },
-      {
-        id: "prod5",
-        title: "Product 5",
-        price: 240,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      },
-      {
-        id: "prod6",
-        title: "Product 6",
-        price: 240,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      },
-      {
-        id: "prod7",
-        title: "Product 7",
-        price: 240,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      },
-      {
-        id: "prod8",
-        title: "Product 8",
-        price: 240,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      },
-      {
-        id: "prod9",
-        title: "Product 9",
-        price: 240,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      },
-      {
-        id: "prod10",
-        title: "Product 10",
-        price: 240,
-        totalPrice: 0,
-        amount: 0,
-        image: "https://picsum.photos/300/300?image=0&&blur",
-        inCart: false
-      }
-    ]
-  }
-};
+  export default {
+    components: {
+      productItem
+    },
+    data() {
+      return {
+        products: []
+      };
+    },
+    computed: {
+      ...mapGetters(["productsInStock"])
+    },
+    beforeMount() {
+      this.products = [
+        {
+          id: "prod1",
+          title: "Product 1",
+          price: 250,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        },
+        {
+          id: "prod2",
+          title: "Product 2",
+          price: 150,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        },
+        {
+          id: "prod3",
+          title: "Product 3",
+          price: 250,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        },
+        {
+          id: "prod4",
+          title: "Product 4",
+          price: 240,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        },
+        {
+          id: "prod5",
+          title: "Product 5",
+          price: 240,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        },
+        {
+          id: "prod6",
+          title: "Product 6",
+          price: 240,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        },
+        {
+          id: "prod7",
+          title: "Product 7",
+          price: 240,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        },
+        {
+          id: "prod8",
+          title: "Product 8",
+          price: 240,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        },
+        {
+          id: "prod9",
+          title: "Product 9",
+          price: 240,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        },
+        {
+          id: "prod10",
+          title: "Product 10",
+          price: 240,
+          totalPrice: 0,
+          amount: 0,
+          image: "https://picsum.photos/300/300?image=0&&blur",
+          inCart: false
+        }
+      ]
+    }
+  };
 </script>
 
 <style lang="scss" scoped>
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  overflow-x: auto;
-  box-sizing: border-box;
-  padding: 4% 2% 0;
-  margin-top: 70px;
-}
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 4% 2% 0;
+    margin-top: 70px;
+  }
 </style>
 

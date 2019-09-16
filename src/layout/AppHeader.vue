@@ -4,7 +4,7 @@
 <!--      <router-link to="/">Home</router-link>|-->
 <!--      <router-link to="/about">About</router-link>-->
 <!--    </div>-->
-    <button class="open-cart-btn" @click="toogleCartPopup"></button>
+    <button class="open-cart-btn" @click="toogleCartPopup"><span v-show="cartPopupVisibile">x</span></button>
     <cart-popup :products="productsInCart" v-show="cartPopupVisibile"></cart-popup>
   </header>
 </template>
@@ -15,7 +15,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      cartPopupVisibile: false
+      cartPopupVisibile: true
     };
   },
   components: {
@@ -44,13 +44,15 @@ header {
   height: 70px;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 5%;
+  padding: 0 2%;
   border-bottom: 1px solid #000;
   background: #fff;
 
   .open-cart-btn {
     width: 40px;
     height: 40px;
+    border: 1px solid #000;
+    font-size: 20px;
   }
 }
 </style>
