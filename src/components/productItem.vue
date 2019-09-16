@@ -10,7 +10,7 @@
     <section class="controls-container">
       <button @click="removeProductItem(product.id)"></button>
       <p class="product-amount">{{ product.amount }}</p>
-      <button @click="addProductItem(product.id)"></button>
+      <button @click="addProductItem(product)"></button>
     </section>
   </article>
 </template>
