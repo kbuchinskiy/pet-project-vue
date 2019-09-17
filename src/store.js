@@ -9,7 +9,8 @@ export default new Vuex.Store({
   },
   mutations: {
     addProductItem: (state, productItemToAdd) => {
-      let existedProduct = state.productsInCart.find(product => product.id === productItemToAdd.id);
+      let existedProduct = state.productsInCart.find(p => p.id === productItemToAdd.id);
+
       if (existedProduct) {
         existedProduct.amount++;
         existedProduct.totalPrice += productItemToAdd.price;
@@ -19,9 +20,12 @@ export default new Vuex.Store({
         productItemToAdd.totalPrice += productItemToAdd.price;
         state.productsInCart.push(productItemToAdd);
       }
+
+      localStorage.setItem('store', JSON.stringify(state));
     },
     removeProductItem: (state, productItemToRemoveId) => {
-      let existedProductIndex = state.productsInCart.findIndex(product => product.id === productItemToRemoveId);
+      let existedProductIndex = state.productsInCart.findIndex(p => p.id === productItemToRemoveId);
+
       if (existedProductIndex === -1) {
         return false;
       }
@@ -33,12 +37,23 @@ export default new Vuex.Store({
       if (existedProduct.amount === 0) {
         state.productsInCart.splice(existedProductIndex, 1);
       }
+
+      localStorage.setItem('store', JSON.stringify(state));
     },
     removeProduct: (state, productId) => {
       state.productsInCart.splice(productId, 1);
+
+      localStorage.setItem('store', JSON.stringify(state));
     },
     cleanCart(state) {
       state.productsInCart = [];
+
+      localStorage.setItem('store', JSON.stringify(state));
+    },
+    initialiseStore(state) {
+      if (localStorage.getItem("store")) {
+        this.replaceState(Object.assign(state, JSON.parse(localStorage.getItem("store"))))
+      }
     }
   },
   actions: {
@@ -58,5 +73,6 @@ export default new Vuex.Store({
   },
   getters: {
     productsInCart: state => state.productsInCart,
+    productInCartAmount: state => productId => state.productsInCart.some(p => p.id === productId) ? state.productsInCart.find(p => p.id === productId).amount : 0
   }
 })

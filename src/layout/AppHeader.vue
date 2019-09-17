@@ -1,5 +1,7 @@
 <template>
   <header>
+  
+    <button v-if="$route.path.match(/product\//)" class="back-button" @click="$router.back()">Back</button>
 <!--    <div id="nav">-->
 <!--      <router-link to="/">Home</router-link>|-->
 <!--      <router-link to="/about">About</router-link>-->
@@ -53,6 +55,13 @@ header {
     height: 40px;
     border: 1px solid #000;
     font-size: 20px;
+  }
+
+  .back-button {
+    margin-right: auto;
+    padding: 2%;
+    border: 1px solid #000;
+
   }
 }
 </style>

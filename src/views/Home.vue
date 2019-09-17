@@ -21,9 +21,6 @@
         products: []
       };
     },
-    computed: {
-      ...mapGetters(["productsInStock"])
-    },
     beforeMount() {
       this.products = [
         {
