@@ -1,12 +1,13 @@
 <template>
   <header>
-  
     <button v-if="$route.path.match(/product\//)" class="back-button" @click="$router.back()">Back</button>
-<!--    <div id="nav">-->
-<!--      <router-link to="/">Home</router-link>|-->
-<!--      <router-link to="/about">About</router-link>-->
-<!--    </div>-->
-    <button class="open-cart-btn" @click="toogleCartPopup"><span v-show="cartPopupVisibile">x</span></button>
+    <!--    <div id="nav">-->
+    <!--      <router-link to="/">Home</router-link>|-->
+    <!--      <router-link to="/about">About</router-link>-->
+    <!--    </div>-->
+    <button class="open-cart-btn" @click="toogleCartPopup">
+      <span v-show="cartPopupVisibile">x</span>
+    </button>
     <cart-popup :products="productsInCart" v-show="cartPopupVisibile"></cart-popup>
   </header>
 </template>
@@ -58,10 +59,12 @@ header {
   }
 
   .back-button {
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 2%;
     margin-right: auto;
-    padding: 2%;
-    border: 1px solid #000;
 
+    border: 1px solid #000;
   }
 }
 </style>

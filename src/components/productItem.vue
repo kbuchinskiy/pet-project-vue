@@ -1,7 +1,7 @@
 <template>
   <article class="product-item">
     <figure class="product-image">
-      <router-link :to="{ path: 'product/' + product.id ,name: 'product', params: {id: product.id, data: product} }">
+      <router-link :to="{ path: 'product/' + product.id}">
         <img :src="product.image" alt="product image" />
       </router-link>
       <figcaption>
@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     productInCartAmount() {
-        return this.$store.getters.productInCartAmount(this.product.id)
+      return this.$store.getters.productInCartAmount(this.product.id);
     }
   }
 };
