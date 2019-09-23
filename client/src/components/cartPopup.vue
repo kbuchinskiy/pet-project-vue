@@ -117,7 +117,11 @@
 
   @media screen and (max-width: 800px) {
     .cart-popup {
-      width: 96%;
+      width: 100%;
+      right: 0;
+      border-left: unset;
+      border-right: unset;
+      border-top: unset;
     }
   }
 </style>

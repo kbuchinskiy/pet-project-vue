@@ -6,9 +6,9 @@
     <!--      <router-link to="/about">About</router-link>-->
     <!--    </div>-->
     <button class="open-cart-btn" @click="toogleCartPopup">
-      <span v-show="cartPopupVisibile">x</span>
+      <span v-show="cartPopupVisible">x</span>
     </button>
-    <cart-popup :products="productsInCart" v-show="cartPopupVisibile"></cart-popup>
+    <cart-popup :products="productsInCart" v-show="cartPopupVisible"></cart-popup>
   </header>
 </template>
 
@@ -18,7 +18,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      cartPopupVisibile: true
+      cartPopupVisible: false
     };
   },
   components: {
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     toogleCartPopup() {
-      this.cartPopupVisibile = !this.cartPopupVisibile;
+      this.cartPopupVisible = !this.cartPopupVisible;
     }
   }
 };

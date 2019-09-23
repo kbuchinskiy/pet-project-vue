@@ -21,12 +21,13 @@
         products: []
       };
     },
+    methods: {
+      async initData() {
+        this.products = await ProductsService.getProducts()
+      }
+    },
     created() {
-
-      this.products = ProductsService.getProducts().then((data) => {
-
-      this.products = data;
-      });
+      this.initData()
     }
   };
 </script>
