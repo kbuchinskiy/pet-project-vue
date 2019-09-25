@@ -42,6 +42,7 @@ export default {
   margin-bottom: 5%;
   overflow: hidden;
   box-shadow: 2px 2px 2px 2px rgba($color: #000000, $alpha: 0.3);
+  border-radius: 3px;
 
   .product-image {
     position: relative;
@@ -83,6 +84,7 @@ export default {
     button {
       width: 40px;
       height: 40px;
+      border-radius: 3px;
     }
   }
 }

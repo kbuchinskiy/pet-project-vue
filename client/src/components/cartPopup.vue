@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-popup" :class="{empty: isEmpty}">
+  <div class="cart-popup" :class="{empty: isEmpty}" v-show="opened">
     <section v-show="!isEmpty" class="cart-body">
       <ul class="cart-list">
         <li v-for="product in products" :key="product.id">
@@ -28,7 +28,8 @@
 
   export default {
     props: {
-      products: Array
+      products: Array,
+      opened: Boolean,
     },
     computed: {
       isEmpty() {
@@ -36,7 +37,13 @@
       }
     },
     methods: {
-      ...mapActions(["addProductItem", "removeProductItem", "removeProduct", "cleanCart"])
+      ...mapActions(["addProductItem", "removeProductItem", "removeProduct"]),
+      cleanCart() {
+        this.$store.dispatch("cleanCart");
+        setTimeout(() => {
+          this.opened = false;
+        }, 1000)
+      }
     }
   };
 </script>
@@ -51,6 +58,8 @@
     box-sizing: border-box;
     background: #fff;
     border: 1px solid #000;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 3px;
 
     .cart-alert {
       padding: 5% 0;
