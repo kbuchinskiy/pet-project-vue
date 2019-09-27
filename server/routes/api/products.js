@@ -1,6 +1,4 @@
 const express = require("express");
-const mongodb = require("mongodb");
-const fs = require("fs");
 const data = require("../../db/products");
 
 const router = express.Router();

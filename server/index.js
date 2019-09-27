@@ -1,8 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const app = express();
 const fs = require("fs");
+
+const generateServerData = require("./db/pseudoDataGenerator");
+
+const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.json());
@@ -38,19 +41,3 @@ function writeData(dataToWrite) {
   })
 }
 
-function generateServerData(productsAmount) {
-  const productsArray = [];
-
-  for (let i = 1; i < productsAmount + 1; i++) {
-    let product = {};
-
-    product.id = `prod${i}`;
-    product.title = `Product ${i}`;
-    product.image = "https://picsum.photos/300/300?image=0&&blur";
-    product.price = Math.ceil(Math.random() * 1000);
-
-    productsArray.push(product);
-  }
-
-  return productsArray;
-}
