@@ -5,7 +5,9 @@
         <li v-for="product in products" :key="product.id">
           <div class="cart-item">
             <button class="icon-button delete-button" @click="removeProduct(product.id)"></button>
-            <p class="cart-item-title">{{product.title}}</p>
+              <router-link :to="{ path: 'product/' + product.id}" class="cart-item-title">
+                {{product.title}}
+              </router-link>
             <div class="controls-container">
               <button class="icon-button remove-button" @click="removeProductItem(product.id)"></button>
               <p class="cart-item-amount">{{product.amount}}</p>
@@ -15,7 +17,7 @@
           </div>
         </li>
       </ul>
-      <button class="clean-button" @click="cleanCart">Clear Cart</button>
+      <button class="clean-button" @click="cleanCart">Clean</button>
     </section>
     <section v-show="isEmpty" class="cart-alert">
       Your cart is empty
@@ -42,7 +44,7 @@
         this.$store.dispatch("cleanCart");
         setTimeout(() => {
           //refactor to dispatch to parent
-          this.opened = false;
+          this.$emit("closeCartPopup");
         }, 1000)
       }
     }
@@ -59,8 +61,12 @@
     box-sizing: border-box;
     background: #fff;
     border: 1px solid #000;
-    border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+
+    button {
+      border-radius: 3px;
+    }
 
     .cart-alert {
       padding: 5% 0;
@@ -76,7 +82,8 @@
       padding: 5%;
 
       .clean-button {
-        padding: 1% 2%;
+        padding: 2% 3%;
+        border-radius: 3px;
         background: brown;
         color: aliceblue;
       }
@@ -99,27 +106,32 @@
             margin-bottom: 0;
           }
 
+          .cart-item-title {
+            color:#000;
+            text-decoration: unset;
+          }
+
           .delete-button {
             margin-right: 10px;
             background: brown;
-          }
-
-          .cart-item-title {
-            min-width: 270px;
           }
 
           .controls-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 80px;
 
+            width: 80px;
+            margin-left: auto;
+            margin-right: 40px;
             border: 1px;
           }
 
           .cart-item-total-price {
-            margin-left: auto;
+            min-width: 40px;
+            text-align: center;
           }
+
         }
       }
     }
@@ -132,6 +144,7 @@
       border-left: unset;
       border-right: unset;
       border-top: unset;
+      border-radius: 0    
     }
   }
 </style>

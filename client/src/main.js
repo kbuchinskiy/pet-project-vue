@@ -9,8 +9,7 @@ Vue.config.productionTip = false;
 const vueProgressBarOptions = {
   color: 'rgb(2, 117, 216)',
   failedColor: 'red',
-  height: '4px',
-  position: "relative"
+  height: '3px'
 };
 
 Vue.use(VueProgressBar, vueProgressBarOptions);

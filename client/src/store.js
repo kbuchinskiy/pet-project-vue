@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 function setLocalStorageRecord(stateObj) {
-  localStorage.setItem("state", JSON.stringify(stateObj))
+  localStorage.setItem("state", JSON.stringify(stateObj));
 }
 
 export default new Vuex.Store({
@@ -55,8 +55,8 @@ export default new Vuex.Store({
       setLocalStorageRecord(state);
     },
     initialiseStore(state) {
-      if (localStorage.getItem("store")) {
-        this.replaceState(Object.assign(state, JSON.parse(localStorage.getItem("store"))))
+      if (localStorage.getItem("state")) {
+        this.replaceState(Object.assign(state, JSON.parse(localStorage.getItem("state"))))
       }
     }
   },

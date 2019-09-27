@@ -47,7 +47,7 @@
 
   .title {
     font-size: 50px;
-    margin-bottom: .5em;
+    margin: .5em 0;
   }
 
   .main-image {
