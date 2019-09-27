@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-popup" :class="{empty: isEmpty}" v-show="opened">
+  <div class="cart-popup" v-show="opened" :class="{empty: isEmpty}">
     <section v-show="!isEmpty" class="cart-body">
       <ul class="cart-list">
         <li v-for="product in products" :key="product.id">
@@ -41,6 +41,7 @@
       cleanCart() {
         this.$store.dispatch("cleanCart");
         setTimeout(() => {
+          //refactor to dispatch to parent
           this.opened = false;
         }, 1000)
       }

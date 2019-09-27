@@ -3,6 +3,10 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+function setLocalStorageRecord(stateObj) {
+  localStorage.setItem("state", JSON.stringify(stateObj))
+}
+
 export default new Vuex.Store({
   state: {
     productsInCart: []
@@ -15,20 +19,21 @@ export default new Vuex.Store({
         existedProduct.amount++;
         existedProduct.totalPrice += productItemToAdd.price;
       } else {
+        productItemToAdd.amount = 1;
+        productItemToAdd.totalPrice = productItemToAdd.price;
         productItemToAdd = Object.assign({}, productItemToAdd);
-        productItemToAdd.amount++;
-        productItemToAdd.totalPrice += productItemToAdd.price;
         state.productsInCart.push(productItemToAdd);
       }
 
-      localStorage.setItem('store', JSON.stringify(state));
+      setLocalStorageRecord(state);
     },
     removeProductItem: (state, productItemToRemoveId) => {
       let existedProductIndex = state.productsInCart.findIndex(p => p.id === productItemToRemoveId);
 
       if (existedProductIndex === -1) {
-        return false;
+        return;
       }
+
       const existedProduct = state.productsInCart[existedProductIndex];
 
       existedProduct.amount--;
@@ -38,17 +43,16 @@ export default new Vuex.Store({
         state.productsInCart.splice(existedProductIndex, 1);
       }
 
-      localStorage.setItem('store', JSON.stringify(state));
+      setLocalStorageRecord(state);
     },
     removeProduct: (state, productId) => {
       state.productsInCart.splice(productId, 1);
 
-      localStorage.setItem('store', JSON.stringify(state));
+      setLocalStorageRecord(state);
     },
     cleanCart(state) {
       state.productsInCart = [];
-
-      localStorage.setItem('store', JSON.stringify(state));
+      setLocalStorageRecord(state);
     },
     initialiseStore(state) {
       if (localStorage.getItem("store")) {
@@ -57,22 +61,27 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    addProductItem: (context, payload) => {
-      context.commit("addProductItem", payload)
+    addProductItem: ({commit}, payload) => {
+      commit("addProductItem", payload)
     },
-    removeProductItem: (context, payload) => {
-      context.commit("removeProductItem", payload);
+    removeProductItem: ({commit}, payload) => {
+      commit("removeProductItem", payload);
     },
-    removeProduct: (context, payload) => {
-      context.commit("removeProduct", payload);
+    removeProduct: ({commit}, payload) => {
+      commit("removeProduct", payload);
     },
-    cleanCart: (context, payload) => {
-      context.commit("cleanCart", payload)
+    cleanCart: ({commit}, payload) => {
+      commit("cleanCart", payload)
     }
-
   },
   getters: {
     productsInCart: state => state.productsInCart,
-    productInCartAmount: state => productId => state.productsInCart.some(p => p.id === productId) ? state.productsInCart.find(p => p.id === productId).amount : 0
+    productInCartAmount: state => productId => {
+      if (state.productsInCart.some(p => p.id === productId)) {
+        return state.productsInCart.find(p => p.id === productId).amount;
+      } else {
+        return 0;
+      }
+    }
   }
 })

@@ -1,34 +1,35 @@
 <template>
-  <div class="product-page">
-    <div v-show="!loading">
-      <h1 class="title">{{productData.title}}</h1>
-      <img class="main-image" :src="productData.image" alt/>
-      <p class="price">Price: <b>{{productData.price}}</b></p>
-    </div>
-    <div v-show="loading">
-      Loading...
+  <div class="product-page-view">
+    <vue-progress-bar></vue-progress-bar>
+    <div class="product-page">
+      <div v-show="!isLoading">
+        <h1 class="title">{{productData.title}}</h1>
+        <img class="main-image" :src="productData.image" alt/>
+        <p class="price">Price: <b>{{productData.price}}</b></p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import ProductsService from "../productsService";
+  import Products from "../api/products";
+  import progress from "../mixins/progress";
 
   export default {
+    mixins: [progress],
     data() {
       return {
-        loading: false,
+        isLoading: false,
         productData: {}
       };
     },
     methods: {
       async initData() {
-        this.loading = true;
+        this.isLoading = true;
         await setTimeout(async () => {
-          this.productData = await ProductsService.getProductById(this.$route.params.id);
-          this.loading = false;
+          this.productData = await Products.getProductById(this.$route.params.id);
+          this.isLoading = false;
         }, 1000)
-
       }
     },
     created() {
@@ -40,9 +41,8 @@
 
 <style scoped lang="scss">
   .product-page {
-    padding-top: 70px;
     max-width: 1000px;
-    margin: 3% auto 0;
+    margin: 0 auto;
   }
 
   .title {

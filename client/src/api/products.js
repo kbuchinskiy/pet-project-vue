@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios from "axios/index";
 
-const url = "/api/products";
+const URL = "/api/products";
 
-export default class ProductsService {
+export default class Products {
   static getProducts() {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await axios.get(url);
+        const result = await axios.get(URL);
         const data = result.data;
         resolve(data);
       } catch (err) {
@@ -18,7 +18,7 @@ export default class ProductsService {
   static getProductById(id) {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await axios.get(`${url}/${id}`);
+        const result = await axios.get(`${URL}/${id}`);
         const data = result.data;
         resolve(data);
       } catch (err) {

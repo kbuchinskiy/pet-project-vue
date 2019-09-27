@@ -1,29 +1,39 @@
 <template>
-  <div class="product-list">
-    <product-item
-        v-for="product in products"
-        :key="product.id"
-        :product="product"
-    ></product-item>
+  <div>
+    <vue-progress-bar></vue-progress-bar>
+    <div v-show="!isLoading" class="product-list">
+      <product-item
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+      ></product-item>
+    </div>
   </div>
 </template>
 
 <script>
   import productItem from "@/components/productItem.vue";
-  import ProductsService from "../productsService"
+  import Products from "../api/products"
+  import progress from "../mixins/progress";
 
   export default {
     components: {
       productItem
     },
+    mixins: [progress],
     data() {
       return {
-        products: []
+        products: [],
+        isLoading: false,
       };
     },
     methods: {
       async initData() {
-        this.products = await ProductsService.getProducts()
+        this.isLoading = true;
+        await setTimeout(async () => {
+          this.products = await Products.getProducts();
+          this.isLoading = false;
+        }, 1000);
       }
     },
     created() {
@@ -39,7 +49,6 @@
     justify-content: space-between;
     box-sizing: border-box;
     padding: 4% 2% 0;
-    margin-top: 70px;
   }
 </style>
 
