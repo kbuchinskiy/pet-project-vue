@@ -10,17 +10,21 @@
       </figcaption>
     </figure>
     <section class="controls-container">
-      <button class="remove-button" @click="removeProductItem(product.id)"></button>
+      <fa-button @click="removeProductItem(product.id)" icon="minus" class="remove-button" />
       <p class="product-amount">{{ productInCartAmount }}</p>
-      <button class="add-button" @click="addProductItem(product)"></button>
+      <fa-button @click="addProductItem(product)" icon="plus" class="add-button" />
     </section>
   </article>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import faButton from "@/components/faButton.vue";
 
 export default {
+  components: {
+    faButton
+  },
   props: {
     product: Object
   },

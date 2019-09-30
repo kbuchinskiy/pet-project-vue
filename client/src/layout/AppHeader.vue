@@ -1,7 +1,16 @@
 <template>
   <header>
-    <button v-if="$route.path.match(/product\//)" @click="$router.back()" class="back-button">Back</button>
-    <button @click="toogleCartPopup" :class="{active: cartPopupOpened}" class="open-cart-btn"></button>
+    <fa-button
+      v-if="$route.path.match(/product\//)"
+      @click="$router.back()"
+      icon="arrow-left"
+      class="back-button"
+    />
+    <fa-button
+      @click="toogleCartPopup"
+      :icon="cartPopupOpened ? 'times' : 'shopping-cart'"
+      class="toggle-cart-btn"
+    />
     <cart-popup
       :products="productsInCart"
       :opened="cartPopupOpened"
@@ -12,15 +21,17 @@
 
 <script>
 import cartPopup from "@/components/cartPopup.vue";
+import faButton from "@/components/faButton.vue";
 import { mapGetters } from "vuex";
 export default {
+  components: {
+    cartPopup,
+    faButton
+  },
   data() {
     return {
       cartPopupOpened: false
     };
-  },
-  components: {
-    cartPopup
   },
   computed: {
     ...mapGetters(["productsInCart"])
@@ -46,30 +57,21 @@ header {
   width: 100%;
   box-sizing: border-box;
   padding: 0 2%;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #555;
   background: #fff;
 
-  .open-cart-btn {
+  .toggle-cart-btn {
     width: 40px;
     height: 40px;
     border-radius: 3px;
     font-size: 20px;
-    
-    background: url("../assets/images/cart_icon.png") center/cover no-repeat;
-  }
-
-  .open-cart-btn.active {
-    background: url("../assets/images/close_button.png") center/100% no-repeat;
+    border: unset;
   }
 
   .back-button {
     height: 40px;
-    box-sizing: border-box;
-    padding: 0 2%;
     margin-right: auto;
-
-    border: 1px solid #000;
-    border-radius: 3px;
+    font-size: 1.2em;
   }
 }
 </style>

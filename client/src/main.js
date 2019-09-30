@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueProgressBar from 'vue-progressbar';
+import VueProgressBar from 'vue-progressbar'
 import router from './router'
 import store from './store'
 

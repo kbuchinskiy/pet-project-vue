@@ -40,17 +40,3 @@ button {
     background-position: center;
   }
 }
-
-button {
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &.add-button {
-    background-color: #42b983;
-  }
-
-  &.remove-button {
-    background-color: #b96d75;
-  }
-}

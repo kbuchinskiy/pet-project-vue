@@ -4,14 +4,14 @@
       <ul class="cart-list">
         <li v-for="product in products" :key="product.id">
           <div class="cart-item">
-            <button class="icon-button delete-button" @click="removeProduct(product.id)"></button>
+            <faButton class="icon-button delete-button" @click="removeProduct(product.id)" icon="trash" />
               <router-link :to="{ path: 'product/' + product.id}" class="cart-item-title">
                 {{product.title}}
               </router-link>
             <div class="controls-container">
-              <button class="icon-button remove-button" @click="removeProductItem(product.id)"></button>
+              <faButton class="icon-button remove-button" @click="removeProductItem(product.id)" icon="minus" />
               <p class="cart-item-amount">{{product.amount}}</p>
-              <button class="icon-button add-button" @click="addProductItem(product)"></button>
+              <faButton class="icon-button add-button" @click="addProductItem(product)" icon="plus" />
             </div>
             <p class="cart-item-total-price">{{product.totalPrice}}</p>
           </div>
@@ -27,8 +27,11 @@
 
 <script>
   import {mapActions} from "vuex";
-
+  import faButton from "@/components/faButton.vue";
   export default {
+    components: {
+      faButton
+    },
     props: {
       products: Array,
       opened: Boolean,
@@ -64,10 +67,6 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 
-    button {
-      border-radius: 3px;
-    }
-
     .cart-alert {
       padding: 5% 0;
       text-align: center;
@@ -82,9 +81,9 @@
       padding: 5%;
 
       .clean-button {
-        padding: 2% 3%;
+        padding: 1.5% 2.5%;
         border-radius: 3px;
-        background: brown;
+        background: #333;
         color: aliceblue;
       }
 
@@ -113,7 +112,6 @@
 
           .delete-button {
             margin-right: 10px;
-            background: brown;
           }
 
           .controls-container {
