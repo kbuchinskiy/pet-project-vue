@@ -22,6 +22,6 @@
 
 <style lang="scss" scoped>
   main {
-    padding-top: 70px;
+    padding: calc(70px + 3%) 3%;
   }
 </style>

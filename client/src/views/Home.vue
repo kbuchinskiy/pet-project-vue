@@ -48,7 +48,6 @@
     flex-wrap: wrap;
     justify-content: space-between;
     box-sizing: border-box;
-    padding: 4% 2% 0;
   }
 </style>
 

@@ -83,6 +83,7 @@ export default {
 
     .product-amount {
       font-size: 20px;
+      font-weight: 600;
     }
 
     button {

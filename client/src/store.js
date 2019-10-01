@@ -12,7 +12,7 @@ export default new Vuex.Store({
     productsInCart: []
   },
   mutations: {
-    addProductItem: (state, productItemToAdd) => {
+    ADD_PRODUCT_ITEM: (state, productItemToAdd) => {
       let existedProduct = state.productsInCart.find(p => p.id === productItemToAdd.id);
 
       if (existedProduct) {
@@ -27,7 +27,7 @@ export default new Vuex.Store({
 
       setLocalStorageRecord(state);
     },
-    removeProductItem: (state, productItemToRemoveId) => {
+    REMOVE_PRODUCT_ITEM: (state, productItemToRemoveId) => {
       let existedProductIndex = state.productsInCart.findIndex(p => p.id === productItemToRemoveId);
 
       if (existedProductIndex === -1) {
@@ -45,16 +45,16 @@ export default new Vuex.Store({
 
       setLocalStorageRecord(state);
     },
-    removeProduct: (state, productId) => {
+    REMOVE_PRODUCT: (state, productId) => {
       state.productsInCart.splice(productId, 1);
 
       setLocalStorageRecord(state);
     },
-    cleanCart(state) {
+    CLEAN_CART(state) {
       state.productsInCart = [];
       setLocalStorageRecord(state);
     },
-    initialiseStore(state) {
+    INIT_STORE(state) {
       if (localStorage.getItem("state")) {
         this.replaceState(Object.assign(state, JSON.parse(localStorage.getItem("state"))))
       }
@@ -62,16 +62,16 @@ export default new Vuex.Store({
   },
   actions: {
     addProductItem: ({commit}, payload) => {
-      commit("addProductItem", payload)
+      commit("ADD_PRODUCT_ITEM", payload)
     },
     removeProductItem: ({commit}, payload) => {
-      commit("removeProductItem", payload);
+      commit("REMOVE_PRODUCT_ITEM", payload);
     },
     removeProduct: ({commit}, payload) => {
-      commit("removeProduct", payload);
+      commit("REMOVE_PRODUCT", payload);
     },
     cleanCart: ({commit}, payload) => {
-      commit("cleanCart", payload)
+      commit("CLEAN_CART", payload)
     }
   },
   getters: {

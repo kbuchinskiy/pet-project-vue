@@ -128,6 +128,7 @@
           .cart-item-total-price {
             min-width: 40px;
             text-align: center;
+            font-weight: bold;
           }
 
         }
@@ -142,7 +143,7 @@
       border-left: unset;
       border-right: unset;
       border-top: unset;
-      border-radius: 0    
+      border-radius: 0
     }
   }
 </style>

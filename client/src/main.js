@@ -7,7 +7,7 @@ import store from './store'
 Vue.config.productionTip = false;
 
 const vueProgressBarOptions = {
-  color: 'rgb(2, 117, 216)',
+  color: '#333',
   failedColor: 'red',
   height: '3px'
 };
@@ -19,6 +19,6 @@ new Vue({
   store,
   render: h => h(App),
   beforeCreate() {
-    this.$store.commit('initialiseStore');
+    this.$store.commit('INIT_STORE');
   }
 }).$mount('#app');
