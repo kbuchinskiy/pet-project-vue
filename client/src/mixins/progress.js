@@ -1,15 +1,15 @@
 export default {
   methods: {
     startProgress() {
-      this.$Progress.start();
+      this.$Progress.start()
     },
     finishProgress() {
-      this.$Progress.finish();
-    },
+      this.$Progress.finish()
+    }
   },
   watch: {
     isLoading(status) {
       status ? this.startProgress() : this.finishProgress()
-    },
-  },
-};
+    }
+  }
+}

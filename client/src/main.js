@@ -4,21 +4,21 @@ import VueProgressBar from 'vue-progressbar'
 import router from './router'
 import store from './store'
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
 const vueProgressBarOptions = {
   color: '#333',
   failedColor: 'red',
   height: '3px'
-};
+}
 
-Vue.use(VueProgressBar, vueProgressBarOptions);
+Vue.use(VueProgressBar, vueProgressBarOptions)
 
 new Vue({
   router,
   store,
   render: h => h(App),
   beforeCreate() {
-    this.$store.commit('INIT_STORE');
+    this.$store.commit('INIT_STORE')
   }
-}).$mount('#app');
+}).$mount('#app')

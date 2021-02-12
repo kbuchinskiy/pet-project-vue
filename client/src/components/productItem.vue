@@ -1,7 +1,7 @@
 <template>
   <article class="product-item">
     <figure class="product-image">
-      <router-link :to="{ path: 'product/' + product.id}">
+      <router-link :to="{ name: 'product', params: { id: product.id } }">
         <img :src="product.image" alt="product image" />
       </router-link>
       <figcaption>
@@ -10,16 +10,24 @@
       </figcaption>
     </figure>
     <section class="controls-container">
-      <fa-button @click="removeProductItem(product.id)" icon="minus" class="remove-button" />
+      <fa-button
+        @click="removeProductItem(product.id)"
+        icon="minus"
+        class="remove-button"
+      />
       <p class="product-amount">{{ productInCartAmount }}</p>
-      <fa-button @click="addProductItem(product)" icon="plus" class="add-button" />
+      <fa-button
+        @click="addProductItem(product)"
+        icon="plus"
+        class="add-button"
+      />
     </section>
   </article>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import faButton from "@/components/faButton.vue";
+import { mapActions } from 'vuex'
+import faButton from '@/components/faButton.vue'
 
 export default {
   components: {
@@ -29,16 +37,15 @@ export default {
     product: Object
   },
   methods: {
-    ...mapActions(["addProductItem", "removeProductItem"])
+    ...mapActions(['addProductItem', 'removeProductItem'])
   },
   computed: {
     productInCartAmount() {
-      return this.$store.getters.productInCartAmount(this.product.id);
+      return this.$store.getters.productInCartAmount(this.product.id)
     }
   }
-};
+}
 </script>
-
 
 <style lang="scss" scoped>
 .product-item {
