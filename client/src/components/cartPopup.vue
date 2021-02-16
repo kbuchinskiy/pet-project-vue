@@ -57,9 +57,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addProductItem', 'removeProductItem', 'removeProduct']),
+    ...mapActions('cart', [
+      'addProductItem',
+      'removeProductItem',
+      'removeProduct'
+    ]),
     cleanCart() {
-      this.$store.dispatch('cleanCart')
+      this.$store.dispatch('cart/cleanCart')
       setTimeout(() => {
         //refactor to dispatch to parent
         this.$emit('closeCartPopup')

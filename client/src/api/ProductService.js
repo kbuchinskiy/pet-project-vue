@@ -1,7 +1,7 @@
 import axios from 'axios/index'
 
 const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://localhost:3000/api',
   withCredentials: false // This is the default
 })
 

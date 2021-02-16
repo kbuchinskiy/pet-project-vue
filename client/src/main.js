@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueProgressBar from 'vue-progressbar'
 import router from './router'
-import store from './store'
+import store from '@/store/index'
 
 Vue.config.productionTip = false
 
@@ -19,6 +19,6 @@ new Vue({
   store,
   render: h => h(App),
   beforeCreate() {
-    this.$store.commit('INIT_STORE')
+    this.$store.commit('cart/INIT_STORE')
   }
 }).$mount('#app')

@@ -15,7 +15,7 @@
         icon="minus"
         class="remove-button"
       />
-      <p class="product-amount">{{ productInCartAmount }}</p>
+      <p class="product-amount">{{ productInCartAmount(product.id) }}</p>
       <fa-button
         @click="addProductItem(product)"
         icon="plus"
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import faButton from '@/components/faButton.vue'
 
 export default {
@@ -37,13 +37,9 @@ export default {
     product: Object
   },
   methods: {
-    ...mapActions(['addProductItem', 'removeProductItem'])
+    ...mapActions('cart', ['addProductItem', 'removeProductItem'])
   },
-  computed: {
-    productInCartAmount() {
-      return this.$store.getters.productInCartAmount(this.product.id)
-    }
-  }
+  computed: mapGetters('cart', ['productInCartAmount'])
 }
 </script>
 

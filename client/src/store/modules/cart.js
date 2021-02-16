@@ -1,19 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
-function setLocalStorageRecord(stateObj) {
-  localStorage.setItem('state', JSON.stringify(stateObj))
+function setLocalStorageRecord(itemToStore) {
+  localStorage.setItem('cartProducts', JSON.stringify(itemToStore))
 }
 
-export default new Vuex.Store({
+export default {
+  namespaced: true,
   state: {
-    productsInCart: []
+    products: []
   },
   mutations: {
     ADD_PRODUCT_ITEM: (state, productItemToAdd) => {
-      let existedProduct = state.productsInCart.find(
+      let existedProduct = state.products.find(
         p => p.id === productItemToAdd.id
       )
 
@@ -24,13 +20,13 @@ export default new Vuex.Store({
         productItemToAdd.amount = 1
         productItemToAdd.totalPrice = productItemToAdd.price
         productItemToAdd = Object.assign({}, productItemToAdd)
-        state.productsInCart.push(productItemToAdd)
+        state.products.push(productItemToAdd)
       }
 
-      setLocalStorageRecord(state)
+      setLocalStorageRecord(state.products)
     },
     REMOVE_PRODUCT_ITEM: (state, productItemToRemoveId) => {
-      let existedProductIndex = state.productsInCart.findIndex(
+      let existedProductIndex = state.products.findIndex(
         p => p.id === productItemToRemoveId
       )
 
@@ -38,31 +34,29 @@ export default new Vuex.Store({
         return
       }
 
-      const existedProduct = state.productsInCart[existedProductIndex]
+      const existedProduct = state.products[existedProductIndex]
 
       existedProduct.amount--
       existedProduct.totalPrice -= existedProduct.price
 
       if (existedProduct.amount === 0) {
-        state.productsInCart.splice(existedProductIndex, 1)
+        state.products.splice(existedProductIndex, 1)
       }
 
-      setLocalStorageRecord(state)
+      setLocalStorageRecord(state.products)
     },
     REMOVE_PRODUCT: (state, productId) => {
-      state.productsInCart.splice(productId, 1)
+      state.products.splice(productId, 1)
 
-      setLocalStorageRecord(state)
+      setLocalStorageRecord(state.products)
     },
     CLEAN_CART(state) {
-      state.productsInCart = []
-      setLocalStorageRecord(state)
+      state.products = []
+      setLocalStorageRecord(state.products)
     },
     INIT_STORE(state) {
-      if (localStorage.getItem('state')) {
-        this.replaceState(
-          Object.assign(state, JSON.parse(localStorage.getItem('state')))
-        )
+      if (localStorage.getItem('cartProducts')) {
+        state.products = JSON.parse(localStorage.getItem('cartProducts'))
       }
     }
   },
@@ -76,18 +70,18 @@ export default new Vuex.Store({
     removeProduct: ({ commit }, payload) => {
       commit('REMOVE_PRODUCT', payload)
     },
-    cleanCart: ({ commit }, payload) => {
-      commit('CLEAN_CART', payload)
+    cleanCart: ({ commit }) => {
+      commit('CLEAN_CART')
     }
   },
   getters: {
-    productsInCart: state => state.productsInCart,
+    products: state => state.products,
     productInCartAmount: state => productId => {
-      if (state.productsInCart.some(p => p.id === productId)) {
-        return state.productsInCart.find(p => p.id === productId).amount
+      if (state.products.some(p => p.id === productId)) {
+        return state.products.find(p => p.id === productId).amount
       } else {
         return 0
       }
     }
   }
-})
+}

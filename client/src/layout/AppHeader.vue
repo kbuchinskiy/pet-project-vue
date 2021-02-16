@@ -12,7 +12,7 @@
       class="toggle-cart-btn"
     />
     <cart-popup
-      :products="productsInCart"
+      :products="products"
       :opened="cartPopupOpened"
       @closeCartPopup="cartPopupOpened = false"
     ></cart-popup>
@@ -22,7 +22,7 @@
 <script>
 import cartPopup from '@/components/cartPopup.vue'
 import faButton from '@/components/faButton.vue'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -35,7 +35,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['productsInCart'])
+    ...mapState('cart', ['products'])
   },
   methods: {
     toogleCartPopup() {
