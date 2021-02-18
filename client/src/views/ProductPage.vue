@@ -2,42 +2,35 @@
   <div class="product-page-view">
     <vue-progress-bar></vue-progress-bar>
     <div class="product-page">
-      <div v-show="!isLoading">
-        <h1 class="title">{{ productData.title }}</h1>
-        <img class="main-image" :src="productData.image" alt />
-        <p class="price">
-          Price: <b>{{ productData.price }}</b>
-        </p>
-      </div>
+      <h1 class="title">{{ product.title }}</h1>
+      <img class="main-image" :src="product.image" alt />
+      <p class="price">
+        Price: <b>{{ product.price }}</b>
+      </p>
+      <button class="order-button" @click="addProductItem(product)">
+        add to cart
+      </button>
+      <p v-show="productInCartAmount(product.id)">
+        In cart: {{ productInCartAmount(product.id) }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import ProductService from '../api/ProductService'
-import progress from '../mixins/progress'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  mixins: [progress],
-  data() {
-    return {
-      isLoading: false,
-      productData: {}
+  name: 'product-view',
+  props: {
+    product: {
+      required: true,
+      type: Object
     }
   },
+  computed: mapGetters('cart', ['productInCartAmount']),
   methods: {
-    async initData() {
-      this.isLoading = true
-      await setTimeout(async () => {
-        this.productData = await ProductService.getProductById(
-          this.$route.params.id
-        )
-        this.isLoading = false
-      }, 1000)
-    }
-  },
-  created() {
-    this.initData()
+    ...mapActions('cart', ['addProductItem'])
   }
 }
 </script>
@@ -61,5 +54,12 @@ export default {
   b {
     font-weight: bold;
   }
+}
+
+.order-button {
+  margin: 2em 0;
+  font-weight: 600;
+  border: 1px solid #555;
+  padding: 10px;
 }
 </style>

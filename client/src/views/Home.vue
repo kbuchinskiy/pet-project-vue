@@ -1,7 +1,7 @@
 <template>
   <div>
     <vue-progress-bar></vue-progress-bar>
-    <div v-show="!isLoading" class="product-list">
+    <div class="product-list">
       <product-item
         v-for="product in products"
         :key="product.id"
@@ -13,31 +13,16 @@
 
 <script>
 import productItem from '@/components/productItem.vue'
-import ProductService from '../api/ProductService'
-import progress from '../mixins/progress'
 
 export default {
   components: {
     productItem
   },
-  mixins: [progress],
-  data() {
-    return {
-      products: [],
-      isLoading: false
+  props: {
+    products: {
+      required: true,
+      type: Array
     }
-  },
-  methods: {
-    async initData() {
-      this.isLoading = true
-      await setTimeout(async () => {
-        this.products = await ProductService.getProducts()
-        this.isLoading = false
-      }, 1000)
-    }
-  },
-  created() {
-    this.initData()
   }
 }
 </script>

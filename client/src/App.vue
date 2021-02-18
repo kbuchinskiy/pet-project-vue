@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <preloader />
     <app-header></app-header>
     <main>
       <router-view />
@@ -8,10 +9,12 @@
 </template>
 <script>
 import AppHeader from '@/layout/AppHeader.vue'
+import Preloader from '@/components/Preloader.vue'
 
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    Preloader
   }
 }
 </script>

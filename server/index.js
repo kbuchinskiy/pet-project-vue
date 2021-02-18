@@ -10,13 +10,15 @@ const PORT = 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(function (req, res, next) {
+  setTimeout(next, 3000);
+});
 const products = require("./routes/api/products");
 app.use("/api/products", products);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(__dirname + '/public/'));
-  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(__dirname + "/public/"));
+  app.get(/.*/, (req, res) => res.sendFile(__dirname + "/public/index.html"));
 }
 
 initServer();
@@ -38,6 +40,5 @@ function writeData(dataToWrite) {
         reject(e);
       }
     });
-  })
+  });
 }
-

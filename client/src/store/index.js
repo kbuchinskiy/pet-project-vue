@@ -7,5 +7,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     cart
+  },
+  state: {
+    loading: false
+  },
+  mutations: {
+    SET_LOADING_STATUS(state, payload) {
+      state.loading = payload
+    }
   }
 })
