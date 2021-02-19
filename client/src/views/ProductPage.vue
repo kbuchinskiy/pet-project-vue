@@ -1,6 +1,5 @@
 <template>
   <div class="product-page-view">
-    <vue-progress-bar></vue-progress-bar>
     <div class="product-page">
       <h1 class="title">{{ product.title }}</h1>
       <img class="main-image" :src="product.image" alt />

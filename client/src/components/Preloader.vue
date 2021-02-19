@@ -1,6 +1,6 @@
 <template>
   <div class="preloader">
-    <p v-show="loading">loading...</p>
+    <div class="bar" :class="{ loading: loading }"></div>
   </div>
 </template>
 
@@ -14,26 +14,34 @@ export default {
 <style lang="scss" scoped>
 .preloader {
   position: fixed;
-  right: 5px;
-  bottom: 5px;
+  top: 0;
+  left: 0;
 
   z-index: 999;
-  p {
-    opacity: 0.8;
-    font-size: 1vw;
-    animation: 1s linear infinite blinking;
-  }
 }
 
-@keyframes blinking {
+.bar {
+  width: 100vw;
+  height: 2px;
+}
+
+.loading {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, #52b5ee, #fff, #52b5ee);
+  background-size: 400% 400%;
+
+  animation: gradient 3s linear infinite;
+}
+
+@keyframes gradient {
   0% {
-    opacity: 0.8;
+    background-position: 0 0;
   }
   50% {
-    opacity: 0.4;
+    background-position: 100% 0;
   }
   100% {
-    opacity: 0.8;
+    background-position: 0% 0;
   }
 }
 </style>

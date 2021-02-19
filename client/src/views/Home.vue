@@ -1,6 +1,5 @@
 <template>
   <div>
-    <vue-progress-bar></vue-progress-bar>
     <div class="product-list">
       <product-item
         v-for="product in products"
