@@ -11,7 +11,7 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(cors());
 app.use(function (req, res, next) {
-  setTimeout(next, 3000);
+  setTimeout(next, 0);
 });
 const products = require("./routes/api/products");
 app.use("/api/products", products);
