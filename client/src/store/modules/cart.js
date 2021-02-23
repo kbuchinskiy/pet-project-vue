@@ -84,8 +84,6 @@ export default {
       }
     },
     productsInCartTotal: state =>
-      state.products.reduce((total, product) => {
-        return (total += product.amount)
-      }, 0)
+      state.products.reduce((total, product) => (total += product.amount), 0)
   }
 }

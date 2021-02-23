@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import ProductPage from './views/ProductPage.vue'
 import NotFound from './views/NotFound.vue'
-import ProductService from '@/api/ProductService'
 import store from '@/store/index'
 
 Vue.use(Router)
@@ -18,7 +17,7 @@ const router = new Router({
       component: Home,
       props: true,
       async beforeEnter(to, from, next) {
-        to.params.products = await ProductService.getProducts()
+        to.params.products = await store.dispatch('product/fetchProducts')
         next()
       }
     },
@@ -28,7 +27,10 @@ const router = new Router({
       component: ProductPage,
       props: true,
       async beforeEnter(to, from, next) {
-        to.params.product = await ProductService.getProductById(to.params.id)
+        to.params.product = await store.dispatch(
+          'product/fetchProduct',
+          to.params.id
+        )
         next()
       }
     },
@@ -45,7 +47,9 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(() => {
-  store.commit('SET_LOADING_STATUS', false)
+  setTimeout(() => {
+    store.commit('SET_LOADING_STATUS', false)
+  }, 300)
 })
 
 export default router

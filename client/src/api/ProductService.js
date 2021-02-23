@@ -5,7 +5,7 @@ const apiClient = axios.create({
   withCredentials: false // This is the default
 })
 
-export default class Products {
+export default class ProductsService {
   static async getProducts() {
     try {
       const result = await apiClient.get('/products')

@@ -32,5 +32,28 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   box-sizing: border-box;
+
+  .product-item {
+    width: 23%;
+    margin-bottom: 5vh;
+  }
+
+  @media screen and (max-width: 1300px) {
+    .product-item {
+      width: 30%;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .product-item {
+      width: 48%;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .product-item {
+      width: 100%;
+    }
+  }
 }
 </style>

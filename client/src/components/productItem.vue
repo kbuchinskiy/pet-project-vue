@@ -47,7 +47,7 @@ export default {
 
 <style lang="scss" scoped>
 .product-item {
-  width: 30%;
+  width: 300px;
   margin-bottom: 5%;
   overflow: hidden;
   box-shadow: 2px 2px 2px 2px rgba($color: #000000, $alpha: 0.3);
@@ -99,17 +99,4 @@ export default {
   }
 }
 
-@media screen and (max-width: 800px) {
-  .product-item {
-    width: 48%;
-    margin-bottom: 5%;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .product-item {
-    width: 100%;
-    margin-bottom: 7%;
-  }
-}
 </style>
