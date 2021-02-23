@@ -15,7 +15,9 @@
         icon="minus"
         class="remove-button"
       />
-      <p class="product-amount">{{ productInCartAmount(product.id) }}</p>
+      <p class="product-amount">
+        {{ specificProductInCartAmount(product.id) }}
+      </p>
       <fa-button
         @click="addProductItem(product)"
         icon="plus"
@@ -39,7 +41,7 @@ export default {
   methods: {
     ...mapActions('cart', ['addProductItem', 'removeProductItem'])
   },
-  computed: mapGetters('cart', ['productInCartAmount'])
+  computed: mapGetters('cart', ['specificProductInCartAmount'])
 }
 </script>
 

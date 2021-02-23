@@ -76,12 +76,16 @@ export default {
   },
   getters: {
     products: state => state.products,
-    productInCartAmount: state => productId => {
+    specificProductInCartAmount: state => productId => {
       if (state.products.some(p => p.id === productId)) {
         return state.products.find(p => p.id === productId).amount
       } else {
         return 0
       }
-    }
+    },
+    productsInCartTotal: state =>
+      state.products.reduce((total, product) => {
+        return (total += product.amount)
+      }, 0)
   }
 }

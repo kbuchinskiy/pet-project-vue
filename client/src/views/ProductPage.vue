@@ -10,14 +10,14 @@
         <button class="order-button" @click="addProductItem(product)">
           add to cart
         </button>
-        <p v-show="productInCartAmount(product.id)">
-          In cart: {{ productInCartAmount(product.id) }}
+        <p v-show="specificProductInCartAmount(product.id)">
+          In cart: {{ specificProductInCartAmount(product.id) }}
         </p>
       </section>
       <section>
         <accordion
           :tabsData="tabsData"
-          :oneTabToOpen="false"
+          :oneTabToOpen="true"
           :initialTabIndex="0"
         />
       </section>
@@ -37,15 +37,15 @@ export default {
       tabsData: [
         {
           title: 'title 1',
-          content: 'content'
+          content: ' tab content'
         },
         {
           title: 'title 2',
-          content: 'content'
+          content: 'tab content'
         },
         {
           title: 'title 3',
-          content: 'content'
+          content: 'tab content'
         }
       ]
     }
@@ -56,7 +56,7 @@ export default {
       type: Object
     }
   },
-  computed: mapGetters('cart', ['productInCartAmount']),
+  computed: mapGetters('cart', ['specificProductInCartAmount']),
   methods: {
     ...mapActions('cart', ['addProductItem'])
   }

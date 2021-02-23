@@ -32,7 +32,12 @@
           </div>
         </li>
       </ul>
-      <button class="clean-button" @click="cleanCart">Clean</button>
+      <footer>
+        <button class="clean-button" @click="cleanCart">Clean</button>
+        <p>
+          Total: <strong>{{ productsInCartTotal }}</strong>
+        </p>
+      </footer>
     </section>
     <section v-show="isEmpty" class="cart-alert">
       Your cart is empty
@@ -41,7 +46,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import faButton from '@/components/faButton.vue'
 export default {
   components: {
@@ -54,7 +59,8 @@ export default {
   computed: {
     isEmpty() {
       return !this.products.length
-    }
+    },
+    ...mapGetters('cart', ['productsInCartTotal'])
   },
   methods: {
     ...mapActions('cart', [
@@ -96,14 +102,18 @@ export default {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    align-items: flex-end;
     padding: 5%;
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-    .clean-button {
-      padding: 1.5% 2.5%;
-      border-radius: 3px;
-      background: #333;
-      color: aliceblue;
+      .clean-button {
+        padding: 1.5% 2.5%;
+        border-radius: 3px;
+        background: #333;
+        color: aliceblue;
+      }
     }
 
     .cart-list {
@@ -147,7 +157,6 @@ export default {
         .cart-item-total-price {
           min-width: 40px;
           text-align: center;
-          font-weight: bold;
         }
       }
     }
