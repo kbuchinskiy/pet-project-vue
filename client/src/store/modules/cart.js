@@ -5,7 +5,8 @@ function setLocalStorageRecord(itemToStore) {
 export default {
   namespaced: true,
   state: {
-    products: []
+    products: [],
+    isCartPopupOpened: false
   },
   mutations: {
     ADD_PRODUCT_ITEM: (state, productItemToAdd) => {

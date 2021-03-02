@@ -1,5 +1,10 @@
 <template>
-  <div class="cart-popup" v-show="opened" :class="{ empty: isEmpty }">
+  <div
+    class="cart-popup"
+    v-show="isCartPopupOpened"
+    @click.stop
+    :class="{ empty: isEmpty }"
+  >
     <section v-show="!isEmpty" class="cart-body">
       <ul class="cart-list">
         <li v-for="product in products" :key="product.id">
@@ -46,21 +51,21 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import faButton from '@/components/faButton.vue'
 export default {
   components: {
     faButton
   },
   props: {
-    products: Array,
-    opened: Boolean
+    products: Array
   },
   computed: {
     isEmpty() {
       return !this.products.length
     },
-    ...mapGetters('cart', ['productsInCartTotal'])
+    ...mapGetters('cart', ['productsInCartTotal']),
+    ...mapState('cart', ['isCartPopupOpened'])
   },
   methods: {
     ...mapActions('cart', [
@@ -72,9 +77,14 @@ export default {
       this.$store.dispatch('cart/cleanCart')
       setTimeout(() => {
         //refactor to dispatch to parent
-        this.$emit('closeCartPopup')
+        // this.$emit('closeCartPopup')
       }, 1000)
     }
+  },
+  created() {
+    window.addEventListener('click', () => {
+      this.$store.state.cart.isCartPopupOpened = false
+    })
   }
 }
 </script>

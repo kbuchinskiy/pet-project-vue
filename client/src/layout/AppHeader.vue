@@ -2,20 +2,16 @@
   <header>
     <fa-button
       v-if="$route.name !== 'home'"
-      @click="$router.back()"
+      @click="onBackButtonClick"
       icon="arrow-left"
       class="back-button"
     />
     <fa-button
-      @click="toogleCartPopup"
-      :icon="cartPopupOpened ? 'times' : 'shopping-cart'"
+      @click.native.stop="toogleCartPopup"
+      :icon="isCartPopupOpened ? 'times' : 'shopping-cart'"
       class="toggle-cart-btn"
     />
-    <cart-popup
-      :products="products"
-      :opened="cartPopupOpened"
-      @closeCartPopup="cartPopupOpened = false"
-    ></cart-popup>
+    <cart-popup :products="products"></cart-popup>
   </header>
 </template>
 
@@ -29,17 +25,17 @@ export default {
     cartPopup,
     faButton
   },
-  data() {
-    return {
-      cartPopupOpened: false
-    }
-  },
   computed: {
-    ...mapState('cart', ['products'])
+    ...mapState('cart', ['products', 'isCartPopupOpened'])
   },
   methods: {
     toogleCartPopup() {
-      this.cartPopupOpened = !this.cartPopupOpened
+      this.$store.state.cart.isCartPopupOpened = !this.$store.state.cart
+        .isCartPopupOpened
+    },
+    onBackButtonClick() {
+      this.$router.back()
+      this.$store.state.cart.isCartPopupOpened = false
     }
   }
 }
