@@ -11,11 +11,12 @@ export default {
   namespaced: true,
   state: {
     products: [],
-    product: {}
+    product: {},
+    noNewProductsToLoad: false
   },
   mutations: {
     SET_PRODUCTS(state, products) {
-      state.products = state.products.concat(products)
+      state.products.push(...products)
     },
     SET_PRODUCT(state, product) {
       state.product = product
@@ -29,6 +30,9 @@ export default {
       })
       if (products && products.length) {
         commit('SET_PRODUCTS', products)
+      }
+      if (products.length === 0) {
+        state.noNewProductsToLoad = true
       }
       return products
     },

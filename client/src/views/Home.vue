@@ -20,7 +20,7 @@ export default {
   },
 
   computed: {
-    ...mapState('product', ['products']),
+    ...mapState('product', ['products', 'noNewProductsToLoad']),
     ...mapState(['loading'])
   },
   methods: {
@@ -28,25 +28,31 @@ export default {
       this.$store.commit('SET_LOADING_STATUS', true)
       await this.$store.dispatch('product/fetchProducts', amount)
       this.$store.commit('SET_LOADING_STATUS', false)
-    }
-  },
-  async created() {
-    const isUserScrolledBottom = () =>
-      window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 1
-    await this.fetchProducts(6)
-    if (isUserScrolledBottom()) {
-      if (!this.loading) {
-        await this.fetchProducts(3)
+    },
+    async onUserScroll() {
+      if (this.noNewProductsToLoad) {
+        return
       }
-    }
+      const isUserScrolledBottom =
+        window.innerHeight + window.pageYOffset >=
+        document.body.offsetHeight - 1
 
-    window.addEventListener('scroll', async () => {
-      if (isUserScrolledBottom()) {
+      if (isUserScrolledBottom) {
         if (!this.loading) {
           await this.fetchProducts(3)
         }
       }
-    })
+    }
+  },
+  async created() {
+    if (!this.products.length) {
+      await this.fetchProducts(6)
+    }
+
+    window.addEventListener('scroll', this.onUserScroll)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onUserScroll)
   }
 }
 </script>
