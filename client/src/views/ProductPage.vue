@@ -2,7 +2,6 @@
   <div class="product-page-view">
     <div class="product-page">
       <section>
-        <h1 class="title">{{ product.title }}</h1>
         <img class="main-image" :src="product.image" alt />
         <p class="price">
           Price: <b>{{ product.price }}</b>
@@ -15,6 +14,7 @@
         </p>
       </section>
       <section>
+        <h1 class="title">{{ product.title }}</h1>
         <accordion
           :tabsData="tabsData"
           :oneTabToOpen="true"
@@ -77,7 +77,7 @@ export default {
 
 .title {
   font-size: 50px;
-  margin: 0.5em 0;
+  margin: 0 0 0.5em;
 }
 
 .main-image {

@@ -14,12 +14,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
-      props: true,
-      async beforeEnter(to, from, next) {
-        to.params.products = await store.dispatch('product/fetchProducts')
-        next()
-      }
+      component: Home
     },
     {
       path: '/product/:id',
@@ -47,9 +42,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(() => {
-  setTimeout(() => {
-    store.commit('SET_LOADING_STATUS', false)
-  }, 300)
+  store.commit('SET_LOADING_STATUS', false)
 })
 
 export default router

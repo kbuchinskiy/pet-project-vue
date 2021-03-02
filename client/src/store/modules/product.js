@@ -1,5 +1,12 @@
 import ProductService from '@/api/ProductService'
 
+async function getProducts(queryParams) {
+  return await ProductService.getProducts(
+    queryParams.lastItemIndex,
+    queryParams.amount
+  )
+}
+
 export default {
   namespaced: true,
   state: {
@@ -8,16 +15,21 @@ export default {
   },
   mutations: {
     SET_PRODUCTS(state, products) {
-      state.products = products
+      state.products = state.products.concat(products)
     },
     SET_PRODUCT(state, product) {
       state.product = product
     }
   },
   actions: {
-    async fetchProducts({ commit }) {
-      const products = await ProductService.getProducts()
-      commit('SET_PRODUCTS', products)
+    async fetchProducts({ commit, state }, amount) {
+      const products = await getProducts({
+        amount,
+        lastItemIndex: state.products.length
+      })
+      if (products && products.length) {
+        commit('SET_PRODUCTS', products)
+      }
       return products
     },
     async fetchProduct({ commit, getters }, id) {

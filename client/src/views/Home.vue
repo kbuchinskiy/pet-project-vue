@@ -12,16 +12,41 @@
 
 <script>
 import productItem from '@/components/productItem.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     productItem
   },
-  props: {
-    products: {
-      required: true,
-      type: Array
+
+  computed: {
+    ...mapState('product', ['products']),
+    ...mapState(['loading'])
+  },
+  methods: {
+    async fetchProducts(amount) {
+      this.$store.commit('SET_LOADING_STATUS', true)
+      await this.$store.dispatch('product/fetchProducts', amount)
+      this.$store.commit('SET_LOADING_STATUS', false)
     }
+  },
+  async created() {
+    const isUserScrolledBottom = () =>
+      window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 1
+    await this.fetchProducts(6)
+    if (isUserScrolledBottom()) {
+      if (!this.loading) {
+        await this.fetchProducts(3)
+      }
+    }
+
+    window.addEventListener('scroll', async () => {
+      if (isUserScrolledBottom()) {
+        if (!this.loading) {
+          await this.fetchProducts(3)
+        }
+      }
+    })
   }
 }
 </script>

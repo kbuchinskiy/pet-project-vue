@@ -5,7 +5,10 @@ const router = express.Router();
 
 // get products
 router.get("/", (req, res) => {
-  res.end(JSON.stringify(data));
+  const lastItemIndex = parseInt(req.query.lastItemIndex);
+  const amount = parseInt(req.query.amount);
+  const products = data.slice(lastItemIndex, lastItemIndex + amount);
+  res.end(JSON.stringify(products));
 });
 
 // get one product by products

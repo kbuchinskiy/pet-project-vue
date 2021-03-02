@@ -6,9 +6,14 @@ const apiClient = axios.create({
 })
 
 export default class ProductsService {
-  static async getProducts() {
+  static async getProducts(lastItemIndex = 0, amount = 3) {
     try {
-      const result = await apiClient.get('/products')
+      const result = await apiClient.get(`/products`, {
+        params: {
+          lastItemIndex,
+          amount
+        }
+      })
       return result.data
     } catch (err) {
       console.error(err)
